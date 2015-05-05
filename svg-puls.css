@@ -1,0 +1,36 @@
+body {
+    background: black;
+}
+
+path.ekg {
+    fill: none;
+    stroke: rgb(152, 255, 92);
+    stroke-width: 2;
+
+    stroke-dasharray: 120 745; /* Length of the path */
+    stroke-dashoffset: 120;
+
+    animation: 2s ekg linear;
+    -webkit-animation: 2s ekg linear;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+/* Keyframes*/
+@keyframes ekg {
+    from {
+        stroke-dashoffset: 120;
+    }
+    to {
+        stroke-dashoffset: -745;
+    }
+}
+
+@-webkit-keyframes ekg {
+    from {
+        stroke-dashoffset: 120;
+    }
+    to {
+        stroke-dashoffset: -745;
+    }
+}
