@@ -16,6 +16,42 @@ path.ekg {
     -webkit-animation-iteration-count: infinite;
 }
 
+path.linus {
+    fill: none;
+    stroke: rgb(152, 255, 92);
+    stroke-width: 2;
+
+    stroke-dasharray: 400 1047; /* Length of the path */
+    stroke-dashoffset: 100;
+
+    animation: 2s linus-animation  linear;
+    -webkit-animation: 2s linus-animation  linear;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+
+}
+
+h1 {
+    font-family: sans-serif;
+    font-size: 200px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+path.lund {
+    fill: white;
+    stroke: #333;
+    stroke-width: 1;
+
+    stroke-dasharray:  1197; /* Length of the path */
+    stroke-dashoffset: 0;
+
+
+    animation: 5s lund-animation  linear;
+    -webkit-animation: 5s lund-animation  linear;
+
+}
+
 /* Keyframes*/
 @keyframes ekg {
     from {
@@ -32,5 +68,43 @@ path.ekg {
     }
     to {
         stroke-dashoffset: -745;
+    }
+}
+
+/* Keyframes*/
+@keyframes linus-animation {
+    from {
+        stroke-dashoffset: 400;
+    }
+    to {
+        stroke-dashoffset: -1046;
+    }
+}
+
+@-webkit-keyframes linus-animation {
+    from {
+        stroke-dashoffset: 400;
+    }
+    to {
+        stroke-dashoffset: -1046;
+    }
+}
+
+/* Keyframes*/
+@keyframes lund-animation {
+    from {
+        stroke-dashoffset: -1197;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-webkit-keyframes lund-animation {
+    from {
+        stroke-dashoffset: -1197;
+    }
+    to {
+        stroke-dashoffset: 0;
     }
 }

@@ -12,16 +12,22 @@
 <p>I detta blogginlägg kollar vi på animering av SVG med hjälp av CSS. Vi skapar en EKG-liknande effekt, likt den du hittar under sidan
     <a href="/tjaenster/systemvaard/" target="_blank">systemvård</a> här på hemsidan.</p>
 
+<p style="
+    font-style: italic;
+    font-size: 90%;
+    padding-left: 1em;
+    border-left: 0.5em solid #EEE;
+    margin: 0 1em 2em 1em;
+">CSS-koden i detta inlägg saknar en del vendor-specifika prefix för ett antal CSS-properties, exempelvis "animation". För att hålla nere längden på blogginlägget har jag
+    endast implementerat dessa properties enligt W3C standarden samt med -webkit- prefix. Du kan själv lägga till övriga vendor-specifika prefix för att få koden att fungera i fler webbläsare.
+    Annars se till att köra koden i Chrome så kommer det fungera finemang. </p>
 
-<h2>Webbläsarsupport</h2>
-<p>Webbläsarsupport för SVG ser relativt bra ut ( <a href="http://caniuse.com/#search=svg" target="_blank">http://caniuse.com/#search=svg</a>). Även webbutvecklarens ärkefiende - Internet Explorer - stödjer det
-    ner till version 9! Men innan vi börjar fira lyckan, låt oss återgå till verkligheten och konstatera att detta inte kommer fungera i Internet Explorer.
-    Inte ens i version 11. Såja! Välkommen tillbaka till IE-verkligheten. Anledningen är att det inte går att använda CSS-animationer på SVG-elementet i
+<p>Webbläsarstödet för SVG ser relativt bra ut ( <a href="http://caniuse.com/#search=svg" target="_blank">http://caniuse.com/#search=svg</a>).
+    Även webbutvecklarens ärkefiende — Internet Explorer — stödjer det
+    ner till version 9! Men innan vi börjar fira lyckan, låt oss återgå till verkligheten och konstatera att följande kod inte kommer fungera i Internet Explorer.
+    Inte ens i version 11. Välkommen tillbaka till IE-verkligheten. Anledningen är att det inte går att tillämpa CSS-animationer på SVG-elementet i
     dessa versioner av IE.</p>
 
-<p>CSS-koden i detta inlägg saknar en del vendor-specifika prefix för ett antal CSS-attribut, exempelvis CSS-attributet "animation". För att hålla nere längden på blogginlägget har jag
-    endast implementerat dessa attribut enligt W3C standarden samt med -webkit- prefix. Du kan själv lägga till övriga vendor-specifika prefix för att få koden att fungera i fler webbläsare.
-    Annars se till att köra koden i Chrome så kommer det fungera finemang. </p>
 
 <h2>SVG</h2>
 <p>Första steget är att få in vår SVG-path som utformar vår EKG-kurva. Rita upp kurvan i Adobe Illustrator eller motsvarande
@@ -54,7 +60,7 @@ path.ekg {
 
 <h2>Stroke-dasharray/stroke-dashoffset.</h2>
 <p> Vi kan börja med att animera vår linje från start till slut.
-    För att åstadkomma detta måste vi först bekanta oss med två CSS-attribut; stroke-dasharray och stroke-dashoffset.</p>
+    För att åstadkomma detta måste vi först bekanta oss med två CSS-properties; stroke-dasharray och stroke-dashoffset.</p>
 
 <h3>Stroke-dasharray</h3>
 <p>Med stroke-dasharray kan vi ange ett mönster för SVG-linjens kantlinje (stroke). Exempelvis om vi sätter värdet till "10" får vi en
@@ -63,7 +69,7 @@ path.ekg {
 
 <img src="/media/1126/stroke-dasharray.jpg" class="image__responsive image__centered" />
 
-<p>Testa experimentera med attributet för att få en känsla hur det fungerar.</p>
+<p>Testa experimentera lite med stroke-dasharray att få en känsla hur det fungerar.</p>
 
 <h3>Stroke-dashoffset</h3>
 <p>Stroke-dashoffset användas i kombination med stroke-dasharray för att "förskjuta" var mönstret ska börja. Kanske lite svårt att greppa. Studera illustrationen nedan:  </p>
@@ -71,7 +77,7 @@ path.ekg {
 <img src="/media/1127/stroke-dashoffset.jpg" class="image__responsive image__centered" />
 
 <p>Är du fortfarande inte riktigt med på hur stroke-dashoffset fungerar? Det bästa sättet är att testa med olika värden fram och tillbaka och se vad resultatet blir.
-Testa lite olika värden på både stroke-dasharray och stroke-dashoffset.</p>
+    Testa lite olika värden på både stroke-dasharray och stroke-dashoffset.</p>
 
 <pre class="prettyprint lang-css">
  path.ekg {
@@ -168,8 +174,8 @@ path.ekg {
 <p>Bättre. Men det är fortfarande inte riktigt den effekten vi vill åt. Istället för att linjen gradvis fylls i vill vi endast att en liten del av linjen är ifylld åt gången.</p>
 
 <p>Låt oss bestämma att den synliga delen ska vara 120 pixlar lång. Vi sätter dasharray till "120 745". Resultatet blir en linje som är 120 pixlar i fylld, följt
-av 745px (linjens längd) som inte är ifyllt. Sätter vi dashoffset till 120 så tangerar linjens slut den vänstra kanten av SVG elementet, det är utgångspunkten i animationen.
-Vi vill därefter animera den till läget där hela linjen passerat förbi hela SVG-ytan. Det uppnår vi genom att sätta dashoffset till -745. Så om vi uppdaterar stylingen för path.ekg till:</p>
+    av 745px (linjens längd) som inte är ifyllt. Sätter vi dashoffset till 120 så tangerar linjens slut den vänstra kanten av SVG elementet, det är utgångspunkten i animationen.
+    Vi vill därefter animera den till läget där hela linjen passerat förbi hela SVG-ytan. Det uppnår vi genom att sätta dashoffset till -745. Så om vi uppdaterar stylingen för path.ekg till:</p>
 
 <pre class="prettyprint lang-css">
 path.ekg {
@@ -211,7 +217,7 @@ path.ekg {
 
 <h2>Finputs</h2>
 <p>Vi kan höja effekten ytterligare genom att lägga till lite gaussisk oskärpa på vår kurva. Det gör vi med hjälp av SVG-filter.
-Lägg till följande inom SVG-taggen:</p>
+    Lägg till följande inom SVG-taggen:</p>
 <pre class="prettyprint lang-html">&lt;defs&gt;
   &lt;filter id=&quot;blur&quot;&gt;
     &lt;feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;5&quot; result=&quot;blurOut&quot; /&gt;
@@ -219,9 +225,10 @@ Lägg till följande inom SVG-taggen:</p>
   &lt;/filter&gt;
 &lt;/defs&gt;</pre>
 
-<p>Nu behöver vi bara ange att vår path ska använda detta filtret. Det kan vi göra genom att lägga till attributet filter på  path-taggen och referera det till filter definitionen vi precis la till:</p>
+<p>Nu behöver vi bara ange att vår path ska använda filtret. Det gör vi genom att lägga till attributet filter på path-taggen och refererar till filter-definitionen vi precis skapade.</p>
 <pre class="prettyprint lang-html">&lt;path  class=&quot;ekg&quot; filter=&quot;url(#blur)&quot;  d=&quot;...&quot; /&gt;</pre>
 
+<p>Det var allt. Källkoden återfinner ni <a href="https://github.com/jonasmattisson/svg-ekg" target="_blank">här</a></p>
 </body>
 </html>
 
